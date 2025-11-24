@@ -61,9 +61,10 @@ jobs:
         with:
           app-name: 'grandnode2'
           slot-name: 'Production'
-          package: ./.net-app
+          package: ./.net-app/
 
           
+
 
 
 
