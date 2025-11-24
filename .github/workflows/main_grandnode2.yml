@@ -55,6 +55,28 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_C72EE7FF914E4FF184F3BF5DE26DE524 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_406BAC0800814151B4EDBB81E9BF1400 }}
 
+      - name: dotnet publish
+        run: dotnet publish -c Release -o ./myapp
+      
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: .net-app
+          path: ./myapp
+          
+          
+      - name: Download artifact from build job
+          uses: actions/download-artifact@v4
+          with:
+            name: .net-app
+
+- name: Deploy to Azure Web App
+  uses: azure/webapps-deploy@v3
+  with:
+    app-name: 'grandnode2'
+    slot-name: 'Production'
+    package: ./.net-app/      
+      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
@@ -63,7 +85,13 @@ jobs:
           slot-name: 'Production'
           package: ./.net-app/
 
+
           
+
+          
+
+          
+
 
 
 
