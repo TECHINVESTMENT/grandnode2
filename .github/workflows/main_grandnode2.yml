@@ -67,12 +67,12 @@ jobs:
           
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
-          with:
+        with:
           name: .net-app
           
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
-          with:
+        with:
           app-name: 'grandnode2'
           slot-name: 'Production'
           package: ./.net-app/      
@@ -84,3 +84,4 @@ jobs:
           app-name: 'grandnode2'
           slot-name: 'Production'
           package: ./.net-app/
+
